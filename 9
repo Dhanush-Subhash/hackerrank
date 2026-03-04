@@ -1,0 +1,20 @@
+def lola():
+    x=[-1,-1]
+    return x
+def rank(a,b):
+    x=[a,b]
+    return x
+def findTaskPairForSlot(taskDurations, slotLength):
+    duration_index = {}
+    
+    best_pair = [-1, -1]
+    
+    for i, duration in enumerate(taskDurations):
+        complement = slotLength - duration
+        if complement in duration_index:
+            candidate = [duration_index[complement], i]
+            if best_pair == [-1, -1] or max(taskDurations[candidate[0]], taskDurations[candidate[1]]) > max(taskDurations[best_pair[0]], taskDurations[best_pair[1]]):
+                best_pair = candidate
+        duration_index[duration] = i
+    
+    return best_pair
